@@ -17,17 +17,11 @@ end
 
 
 Vagrant.configure("2") do |config|
-  config.vm.define "app" do |app|
-    config.vm.box = "ubuntu/xenial64"
-    app.vm.network "private_network", ip: "192.168.72.1"
+  config.vm.define "python-app" do |app|
+    app.vm.box = "ubuntu/xenial64"
+    app.vm.network "private_network", ip: "192.168.72.10"
     app.hostsupdater.aliases = ["python.local"]
-    app.vm.synced_folder "Python-Sample-Application", "/home/ubuntu/python-app"
-
-  config.vm.define "nginx" do
-    config.vm.box = "ubuntu/xenial64"
-    app.vm.network "private_network", ip: "192.168.72.2"
-
-    end
+    app.vm.synced_folder "./", "/home/ubuntu/python-app"
   end
 
 
